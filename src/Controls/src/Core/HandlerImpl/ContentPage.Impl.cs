@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Maui.Controls.Internals;
+﻿using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 
 namespace Microsoft.Maui.Controls
 {
-	public partial class ContentPage : Microsoft.Maui.IPage
+	public partial class ContentPage : IPage
 	{
 		// TODO ezhart That there's a layout alignment here tells us this hierarchy needs work :) 
 		public Primitives.LayoutAlignment HorizontalLayoutAlignment => Primitives.LayoutAlignment.Fill;
 
 		public IView View => Content;
 
-		
+		// TODO ezhart super sus
+		public Thickness Margin => Thickness.Zero;
 
 		internal override void InvalidateMeasureInternal(InvalidationTrigger trigger)
 		{
@@ -21,29 +19,33 @@ namespace Microsoft.Maui.Controls
 			base.InvalidateMeasureInternal(trigger);
 		}
 
-		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
-		{
-			var width = widthConstraint;
-			var height = heightConstraint;
+//		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
+//		{
+//			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.MeasureOverride: widthConstraint = {widthConstraint}, heightConstraint = {heightConstraint}");
 
-#if WINDOWS
-			if (double.IsInfinity(width))
-			{
-				width = 800;
-			}
+//			var width = widthConstraint;
+//			var height = heightConstraint;
 
-			if (double.IsInfinity(height))
-			{
-				height = 800;
-			}
-#endif
+//#if WINDOWS
+//			if (double.IsInfinity(width))
+//			{
+//				width = 800;
+//			}
 
-			IsMeasureValid = true;
-			return new Size(width, height);
-		}
+//			if (double.IsInfinity(height))
+//			{
+//				height = 800;
+//			}
+//#endif
+
+//			IsMeasureValid = true;
+//			return new Size(width, height);
+//		}
 
 		protected override void ArrangeOverride(Rectangle bounds)
 		{
+			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: bounds = {bounds}");
+
 			if (IsArrangeValid)
 			{
 				return;
@@ -63,9 +65,6 @@ namespace Microsoft.Maui.Controls
 
 			if (Content is Layout layout)
 				layout.ResolveLayoutChanges();
-
 		}
-
-
 	}
 }

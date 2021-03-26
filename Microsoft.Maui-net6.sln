@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample-net6",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.Droid-net6", "src\Controls\samples\Controls.Sample.Droid\Maui.Controls.Sample.Droid-net6.csproj", "{BE50FAEF-4096-48B5-B9CE-EE0C38F15A18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.iOS-net6", "src\Controls\samples\Controls.Sample.iOS\Maui.Controls.Sample.iOS-net6.csproj", "{1C3439E6-73D7-4F8E-A64A-5448F5CB18DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.iOSa", "src\Controls\samples\Controls.Sample.iOS\Maui.Controls.Sample.iOSa.csproj", "{1C3439E6-73D7-4F8E-A64A-5448F5CB18DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.MacCatalyst-net6", "src\Controls\samples\Controls.Sample.MacCatalyst\Maui.Controls.Sample.MacCatalyst-net6.csproj", "{D7FE9FD0-144A-4199-93FC-3AD62325F1D6}"
 EndProject

@@ -200,6 +200,8 @@ namespace Maui.Controls.Sample.Pages
 
 			verticalStack.Add(new Image() { Source = "dotnet_bot.png" });
 
+			//Content = verticalStack;
+
 			Content = new ScrollView
 			{
 				Content = verticalStack

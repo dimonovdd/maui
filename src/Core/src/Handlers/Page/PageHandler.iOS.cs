@@ -8,18 +8,17 @@ using NativeView = AppKit.NSView;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class PageHandler : AbstractViewHandler<IPage, LayoutView>
+	public partial class PageHandler : AbstractViewHandler<IPage, PageView>
 	{
-		protected override LayoutView CreateNativeView()
+		protected override PageView CreateNativeView()
 		{
 			if (VirtualView == null)
 			{
 				throw new InvalidOperationException($"{nameof(VirtualView)} must be set to create a LayoutView");
 			}
 
-			var view = new LayoutView
+			var view = new PageView
 			{
-				CrossPlatformMeasure = VirtualView.Measure,
 				CrossPlatformArrange = VirtualView.Arrange,
 			};
 
@@ -34,13 +33,8 @@ namespace Microsoft.Maui.Handlers
 			_ = VirtualView ?? throw new InvalidOperationException($"{nameof(VirtualView)} should have been set by base class.");
 			_ = MauiContext ?? throw new InvalidOperationException($"{nameof(MauiContext)} should have been set by base class.");
 
-			TypedNativeView.CrossPlatformMeasure = VirtualView.Measure;
 			TypedNativeView.CrossPlatformArrange = VirtualView.Arrange;
-
-			//foreach (var child in VirtualView.Children)
-			//{
-			//	TypedNativeView.AddSubview(child.ToNative(MauiContext));
-			//}
+			TypedNativeView.AddSubview(VirtualView.View.ToNative(MauiContext));
 		}
 	}
 }
