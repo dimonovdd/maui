@@ -6,28 +6,14 @@ using Microsoft.Maui.Graphics;
 
 namespace Microsoft.Maui.Controls
 {
-	// TODO: We don't currently have any concept of a page in Maui
-	// so this just treats it as a layout for now
-	public partial class ContentPage : Microsoft.Maui.ILayout
+	public partial class ContentPage : Microsoft.Maui.IPage
 	{
-		IReadOnlyList<Microsoft.Maui.IView> Microsoft.Maui.ILayout.Children =>
-			new List<IView>() { Content };
-
-		ILayoutHandler Maui.ILayout.LayoutHandler => Handler as ILayoutHandler;
-
-		Thickness Maui.IView.Margin => new Thickness();
-
+		// TODO ezhart That there's a layout alignment here tells us this hierarchy needs work :) 
 		public Primitives.LayoutAlignment HorizontalLayoutAlignment => Primitives.LayoutAlignment.Fill;
 
-		void Maui.ILayout.Add(IView child)
-		{
-			Content = (View)child;
-		}
+		public IView View => Content;
 
-		void Maui.ILayout.Remove(IView child)
-		{
-			Content = null;
-		}
+		
 
 		internal override void InvalidateMeasureInternal(InvalidationTrigger trigger)
 		{

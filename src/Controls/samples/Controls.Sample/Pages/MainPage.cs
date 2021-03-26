@@ -250,7 +250,7 @@ namespace Maui.Controls.Sample.Pages
 			Content = verticalStack;
 		}
 
-		public IView View { get => (IView)Content; set => Content = (View)value; }
+		//public IView View { get => (IView)Content; set => Content = (View)value; }
 
 		IView CreateSampleGrid()
 		{

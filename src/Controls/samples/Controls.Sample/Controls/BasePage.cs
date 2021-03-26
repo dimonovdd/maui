@@ -8,7 +8,7 @@ namespace Maui.Controls.Sample.Controls
 		IView IPage.View
 		{
 			get => Content;
-			set => Content = (View)value;
+			//set => Content = (View)value;
 		}
 	}
 }
