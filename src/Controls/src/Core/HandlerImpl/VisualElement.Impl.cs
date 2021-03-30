@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls
 
 		public virtual bool IsMeasureValid { get; protected set; }
 
-		public bool IsArrangeValid { get; protected set; }
+		public virtual bool IsArrangeValid { get; protected set; }
 
 		public void Arrange(Rectangle bounds)
 		{
@@ -51,8 +51,16 @@ namespace Microsoft.Maui.Controls
 		// the interface has to be explicitly implemented to avoid conflict with the old Arrange method
 		protected virtual void ArrangeOverride(Rectangle bounds)
 		{
+			System.Diagnostics.Debug.WriteLine($">>>>>> {this} ArrangeOverride, bounds = {bounds}");
+
 			if (IsArrangeValid)
+			{
+				System.Diagnostics.Debug.WriteLine($">>>>>> Arrange valid, skipping");
 				return;
+			}
+
+			System.Diagnostics.Debug.WriteLine($">>>>>> Arranging ...");
+
 			IsArrangeValid = true;
 
 			var newRect = this.ComputeFrame(bounds);
@@ -76,17 +84,18 @@ namespace Microsoft.Maui.Controls
 
 		// TODO MAUI. Current MAUI layouts don't
 		// invalidate if the children change
-		void InvalidateParentHack()
-		{
-			if (!(this is Page))
-				this.FindParentOfType<Page>()?.InvalidateMeasure();
-		}
+		//void InvalidateParentHack()
+		//{
+		//	if (!(this is Page))
+		//		this.FindParentOfType<Page>()?.InvalidateMeasure();
+		//}
 
 		void IFrameworkElement.InvalidateMeasure()
 		{
 			InvalidateMeasureOverride();
 		}
 
+		// TODO ezhart if you keep this, fix the comments
 		// ArrangeOverride provides a way to allow subclasses (e.g., Layout) to override InvalidateMeasure even though
 		// the interface has to be explicitly implemented to avoid conflict with the VisualElement.InvalidateMeasure method
 		protected virtual void InvalidateMeasureOverride()
@@ -97,7 +106,7 @@ namespace Microsoft.Maui.Controls
 			IsMeasureValid = false;
 			IsArrangeValid = false;
 			InvalidateMeasure();
-			InvalidateParentHack();
+			//InvalidateParentHack();
 		}
 
 		void IFrameworkElement.InvalidateArrange()
@@ -110,13 +119,22 @@ namespace Microsoft.Maui.Controls
 			return MeasureOverride(widthConstraint, heightConstraint);
 		}
 
+		// TODO ezhart if you keep this, fix the comments
 		// ArrangeOverride provides a way to allow subclasses (e.g., Layout) to override Measure even though
 		// the interface has to be explicitly implemented to avoid conflict with the old Measure method
 		protected virtual Size MeasureOverride(double widthConstraint, double heightConstraint)
 		{
+			System.Diagnostics.Debug.WriteLine($">>>>>> {this} MeasureOverride, (widthConstraint, heighConstraint) = ({widthConstraint}, {heightConstraint})");
+
 			if (!IsMeasureValid)
 			{
+				System.Diagnostics.Debug.WriteLine($">>>>>> Measure not valid, re-measuring");
+
 				DesiredSize = this.ComputeDesiredSize(widthConstraint, heightConstraint);
+			}
+			else
+			{
+				System.Diagnostics.Debug.WriteLine($">>>>>> Measure was valid, skipping measure");
 			}
 
 			IsMeasureValid = true;

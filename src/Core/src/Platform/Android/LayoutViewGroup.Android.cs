@@ -1,5 +1,6 @@
 using System;
 using Android.Content;
+using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -8,26 +9,32 @@ using Size = Microsoft.Maui.Graphics.Size;
 
 namespace Microsoft.Maui.Handlers
 {
+	// TODO ezhart This doesn't need the .Android prefix anymore for the file name
 	public class LayoutViewGroup : ViewGroup
 	{
 		public LayoutViewGroup(Context context) : base(context)
 		{
+			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
+			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs) : base(context, attrs)
 		{
+			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
 		{
+			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
 		{
+			SetLayerType(LayerType.Software, null);
 		}
 
 		protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
@@ -36,7 +43,7 @@ namespace Microsoft.Maui.Handlers
 			{
 				return;
 			}
-
+			
 			if (CrossPlatformMeasure == null)
 			{
 				base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -46,12 +53,23 @@ namespace Microsoft.Maui.Handlers
 			var deviceIndependentWidth = widthMeasureSpec.ToDouble(Context);
 			var deviceIndependentHeight = heightMeasureSpec.ToDouble(Context);
 
+			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup OnMeasure {deviceIndependentWidth}, {deviceIndependentHeight}");
+
 			var size = CrossPlatformMeasure(deviceIndependentWidth, deviceIndependentHeight);
+
+			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup CrossPlatformMeasure result was {size}");
 
 			var nativeWidth = Context.ToPixels(size.Width);
 			var nativeHeight = Context.ToPixels(size.Height);
 
 			SetMeasuredDimension((int)nativeWidth, (int)nativeHeight);
+		}
+
+		public override void RequestLayout()
+		{
+			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup.RequestLayout");
+
+			base.RequestLayout();	
 		}
 
 		protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -68,6 +86,8 @@ namespace Microsoft.Maui.Handlers
 
 			var destination = Rectangle.FromLTRB(deviceIndependentLeft, deviceIndependentTop,
 				deviceIndependentRight, deviceIndependentBottom);
+
+			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup CrossPlatformArrange to {destination}");
 
 			CrossPlatformArrange(destination);
 		}

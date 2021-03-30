@@ -44,7 +44,7 @@ namespace Microsoft.Maui
 			// then we'll need to change it to AbstractFrameworkElementHandler or create a separate
 			// abstract handler for IPage
 			var nativePage = page.ToNative(window.MauiContext);
-			Debugger.Break();
+
 			// Add the IPage to the root layout; use match parent so the page automatically has the dimensions of the activity
 			nativeRootLayout.AddView(nativePage, new CoordinatorLayout.LayoutParams(matchParent, matchParent));
 		}

@@ -58,7 +58,7 @@ namespace Microsoft.Maui.Controls.Layout2
 				return;
 			}
 
-			Arrange(bounds);
+			Arrange(this.ComputeFrame(bounds));
 
 			LayoutManager.ArrangeChildren(Frame);
 			IsArrangeValid = true;
@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Layout2
 
 			_children.Add(child);
 
-			// TODO MAUI
+			// TODO ezhart If we have parents on the Core side, make that work
 			if (child is Element ve)
 				ve.Parent = this;
 
@@ -98,7 +98,7 @@ namespace Microsoft.Maui.Controls.Layout2
 
 			_children.Remove(child);
 
-			// TODO MAUI
+			// TODO ezhart If we have parents on the Core side, make that work
 			if (child is Element ve)
 				ve.Parent = null;
 

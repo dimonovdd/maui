@@ -19,28 +19,54 @@ namespace Microsoft.Maui.Controls
 			base.InvalidateMeasureInternal(trigger);
 		}
 
-//		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
-//		{
-//			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.MeasureOverride: widthConstraint = {widthConstraint}, heightConstraint = {heightConstraint}");
+		public override bool IsMeasureValid 
+		{
+			get 
+			{ 
+				return base.IsMeasureValid && View.IsMeasureValid; 
+			}
 
-//			var width = widthConstraint;
-//			var height = heightConstraint;
+			protected set => base.IsMeasureValid = value; 
+		}
 
-//#if WINDOWS
-//			if (double.IsInfinity(width))
-//			{
-//				width = 800;
-//			}
+		public override bool IsArrangeValid 
+		{ 
+			get 
+			{
+				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.IsArrangeValid: base.IsArrangeValid = {base.IsArrangeValid}, View.IsArrangeValid = {View.IsArrangeValid}");
+				return base.IsArrangeValid && View.IsArrangeValid; 
+			} 
 
-//			if (double.IsInfinity(height))
-//			{
-//				height = 800;
-//			}
-//#endif
+			protected set => base.IsArrangeValid = value; 
+		}
 
-//			IsMeasureValid = true;
-//			return new Size(width, height);
-//		}
+		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
+		{
+			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.MeasureOverride: widthConstraint = {widthConstraint}, heightConstraint = {heightConstraint}");
+
+			var width = widthConstraint;
+			var height = heightConstraint;
+
+			//#if WINDOWS
+			//			if (double.IsInfinity(width))
+			//			{
+			//				width = 800;
+			//			}
+
+			//			if (double.IsInfinity(height))
+			//			{
+			//				height = 800;
+			//			}
+			//#endif
+
+			if (View is IFrameworkElement fe)
+			{
+				fe.Measure(width, height);
+			}
+
+			IsMeasureValid = true;
+			return new Size(width, height);
+		}
 
 		protected override void ArrangeOverride(Rectangle bounds)
 		{
@@ -48,23 +74,24 @@ namespace Microsoft.Maui.Controls
 
 			if (IsArrangeValid)
 			{
+				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: IsArrangeValid is true, cutting out");
 				return;
 			}
 
 			IsArrangeValid = true;
 			IsMeasureValid = true;
 			Arrange(bounds);
-			Handler?.SetFrame(Frame);
 
-			if (Content is IFrameworkElement fe)
+			if (View is IFrameworkElement fe)
 			{
-				fe.InvalidateArrange();
-				fe.Measure(Frame.Width, Frame.Height);
+				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: arranging content in frame");
 				fe.Arrange(Frame);
 			}
 
-			if (Content is Layout layout)
+			if (View is Layout layout)
 				layout.ResolveLayoutChanges();
+
+			Handler?.SetFrame(Frame);
 		}
 	}
 }

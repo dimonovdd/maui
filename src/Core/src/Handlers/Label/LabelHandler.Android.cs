@@ -1,7 +1,11 @@
 using System;
-using Android.Widget;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Graphics;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using Java.Lang;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Maui.Handlers
 {
@@ -11,7 +15,7 @@ namespace Microsoft.Maui.Handlers
 		static float LineSpacingAddDefault { get; set; }
 		static float LineSpacingMultDefault { get; set; }
 
-		protected override TextView CreateNativeView() => new TextView(Context);
+		protected override TextView CreateNativeView() => new MyTextView(Context);
 
 		protected override void SetupDefaults(TextView nativeView)
 		{
