@@ -15,6 +15,6 @@ namespace Maui.Controls.Sample.SingleProject
 			};
 		}
 
-		public IView View { get => (IView)Content; set => Content = (View)value; }
+		//public IView View { get => (IView)Content; set => Content = (View)value; }
 	}
 }

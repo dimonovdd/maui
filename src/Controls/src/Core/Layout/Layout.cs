@@ -58,10 +58,16 @@ namespace Microsoft.Maui.Controls.Layout2
 				return;
 			}
 
-			Arrange(this.ComputeFrame(bounds));
+			// TODO ezhart Write up some comments about why this method looks so weird
+			// When/where does Frame get updated?
+
+			var computedFrame = this.ComputeFrame(bounds);
+
+			Arrange(computedFrame);
 
 			LayoutManager.ArrangeChildren(Frame);
 			IsArrangeValid = true;
+
 			Handler?.SetFrame(Frame);
 		}
 

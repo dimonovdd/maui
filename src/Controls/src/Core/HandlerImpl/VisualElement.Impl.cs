@@ -51,15 +51,10 @@ namespace Microsoft.Maui.Controls
 		// the interface has to be explicitly implemented to avoid conflict with the old Arrange method
 		protected virtual void ArrangeOverride(Rectangle bounds)
 		{
-			System.Diagnostics.Debug.WriteLine($">>>>>> {this} ArrangeOverride, bounds = {bounds}");
-
 			if (IsArrangeValid)
 			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> Arrange valid, skipping");
 				return;
 			}
-
-			System.Diagnostics.Debug.WriteLine($">>>>>> Arranging ...");
 
 			IsArrangeValid = true;
 
@@ -124,17 +119,9 @@ namespace Microsoft.Maui.Controls
 		// the interface has to be explicitly implemented to avoid conflict with the old Measure method
 		protected virtual Size MeasureOverride(double widthConstraint, double heightConstraint)
 		{
-			System.Diagnostics.Debug.WriteLine($">>>>>> {this} MeasureOverride, (widthConstraint, heighConstraint) = ({widthConstraint}, {heightConstraint})");
-
 			if (!IsMeasureValid)
 			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> Measure not valid, re-measuring");
-
 				DesiredSize = this.ComputeDesiredSize(widthConstraint, heightConstraint);
-			}
-			else
-			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> Measure was valid, skipping measure");
 			}
 
 			IsMeasureValid = true;
