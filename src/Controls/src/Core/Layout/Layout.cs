@@ -82,9 +82,8 @@ namespace Microsoft.Maui.Controls.Layout2
 
 			_children.Add(child);
 
-			// TODO ezhart If we have parents on the Core side, make that work
-			if (child is Element ve)
-				ve.Parent = this;
+			if (child is Element element)
+				element.Parent = this;
 
 			InvalidateMeasure();
 
@@ -98,9 +97,8 @@ namespace Microsoft.Maui.Controls.Layout2
 
 			_children.Remove(child);
 
-			// TODO ezhart If we have parents on the Core side, make that work
-			if (child is Element ve)
-				ve.Parent = null;
+			if (child is Element element)
+				element.Parent = null;
 
 			InvalidateMeasure();
 

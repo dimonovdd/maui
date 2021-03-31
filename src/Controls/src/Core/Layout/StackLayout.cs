@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Layout2
 		{
 			get
 			{
-				// todo ezhart We could use for() over these lists for a tiny performance win
+				// TODO ezhart We could use for() over these lists for a tiny performance win
 				return _isMeasureValid
 					&& Children.All(child => child.IsMeasureValid);
 			}
@@ -29,6 +29,7 @@ namespace Microsoft.Maui.Controls.Layout2
 		{
 			get
 			{
+				// TODO ezhart We could use for() over these lists for a tiny performance win
 				return _isArrangeValid
 					&& Children.All(child => child.IsArrangeValid);
 			}

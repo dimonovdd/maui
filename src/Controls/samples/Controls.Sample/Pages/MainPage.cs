@@ -27,9 +27,7 @@ namespace Maui.Controls.Sample.Pages
 			//SetupCompatibilityLayout();
 		}
 
-		void SetupMauiLayout()
-		{
-			const string loremIpsum =
+		const string loremIpsum =
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
 				"Quisque ut dolor metus. Duis vel iaculis mauris, sit amet finibus mi. " +
 				"Etiam congue ornare risus, in facilisis libero tempor eget. " +
@@ -40,7 +38,6 @@ namespace Maui.Controls.Sample.Pages
 
 			var verticalStack = new VerticalStackLayout() { Spacing = 5, BackgroundColor = Colors.AntiqueWhite };
 			var horizontalStack = new HorizontalStackLayout() { Spacing = 2, BackgroundColor = Colors.CornflowerBlue };
-
 
 			verticalStack.Add(CreateSampleGrid());
 
@@ -102,7 +99,7 @@ namespace Maui.Controls.Sample.Pages
 			{
 				TextColor = Colors.Green,
 				Text = "Hello I'm a button",
-				BackgroundColor = Colors.Purple,
+			//	BackgroundColor = Color.Purple,
 				Margin = new Thickness(12)
 			};
 
@@ -283,6 +280,35 @@ namespace Maui.Controls.Sample.Pages
 			layout.BackgroundColor = Colors.Chartreuse;
 
 			return layout;
+		}
+
+		void AddTextResizeDemo(Microsoft.Maui.ILayout layout)
+		{
+			var resizeTestButton = new Button { Text = "Resize Test" };
+
+			var resizeTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.LightBlue };
+			var explicitWidthTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.LightGreen, WidthRequest = 200 };
+			var widthAndHeightTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.MediumSeaGreen, WidthRequest = 150, HeightRequest = 40 };
+
+			resizeTestButton.Clicked += (sender, args) => {
+				if (resizeTestLabel.Text == "Short Text")
+				{
+					resizeTestLabel.Text = loremIpsum;
+					explicitWidthTestLabel.Text = loremIpsum;
+					widthAndHeightTestLabel.Text = loremIpsum;
+				}
+				else
+				{
+					resizeTestLabel.Text = "Short Text";
+					explicitWidthTestLabel.Text = "Short Text";
+					widthAndHeightTestLabel.Text = "Short Text";
+				}
+			};
+
+			layout.Add(resizeTestButton);
+			layout.Add(resizeTestLabel);
+			layout.Add(widthAndHeightTestLabel);
+			layout.Add(explicitWidthTestLabel);
 		}
 	}
 }

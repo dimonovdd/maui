@@ -33,7 +33,6 @@ namespace Microsoft.Maui.Controls
 		{ 
 			get 
 			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.IsArrangeValid: base.IsArrangeValid = {base.IsArrangeValid}, View.IsArrangeValid = {View.IsArrangeValid}");
 				return base.IsArrangeValid && View.IsArrangeValid; 
 			} 
 
@@ -42,22 +41,22 @@ namespace Microsoft.Maui.Controls
 
 		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
 		{
-			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.MeasureOverride: widthConstraint = {widthConstraint}, heightConstraint = {heightConstraint}");
-
 			var width = widthConstraint;
 			var height = heightConstraint;
 
-			//#if WINDOWS
-			//			if (double.IsInfinity(width))
-			//			{
-			//				width = 800;
-			//			}
+#if WINDOWS
+			// TODO ezhart Hmmmm......
 
-			//			if (double.IsInfinity(height))
-			//			{
-			//				height = 800;
-			//			}
-			//#endif
+			if (double.IsInfinity(width))
+			{
+				width = 800;
+			}
+
+			if (double.IsInfinity(height))
+			{
+				height = 800;
+			}
+#endif
 
 			if (View is IFrameworkElement fe)
 			{
@@ -70,11 +69,8 @@ namespace Microsoft.Maui.Controls
 
 		protected override void ArrangeOverride(Rectangle bounds)
 		{
-			System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: bounds = {bounds}");
-
 			if (IsArrangeValid)
 			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: IsArrangeValid is true, cutting out");
 				return;
 			}
 
@@ -82,14 +78,17 @@ namespace Microsoft.Maui.Controls
 			IsMeasureValid = true;
 			Arrange(bounds);
 
-			if (View is IFrameworkElement fe)
+			if (View is IFrameworkElement element)
 			{
-				System.Diagnostics.Debug.WriteLine($">>>>>> ContentPage.ArrangeOverride: arranging content in frame");
-				fe.Arrange(Frame);
+				element.Arrange(Frame);
 			}
 
 			if (View is Layout layout)
+			{
+				// Force layout resolution if this is a Forms layout
+				// TODO ezhart Not sure this should be happening here; the renderer itself should be doing this. Investigate.
 				layout.ResolveLayoutChanges();
+			}
 
 			Handler?.SetFrame(Frame);
 		}

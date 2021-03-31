@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Android.OS;
 using Android.Views;
 using AndroidX.AppCompat.App;
@@ -38,11 +37,14 @@ namespace Microsoft.Maui
 			//AddToolbar(parent);
 
 			var page = window.Page;
+
 			// This currently relies on IPage : IView, which may not exactly be right
 			// we may have to add another handler extension that works for Page
 			// Also, AbstractViewHandler is set to work for IView (obviously); if IPage is not IView,
 			// then we'll need to change it to AbstractFrameworkElementHandler or create a separate
 			// abstract handler for IPage
+			// TODO ezhart Think about all this stuff ^^
+
 			var nativePage = page.ToNative(window.MauiContext);
 
 			// Add the IPage to the root layout; use match parent so the page automatically has the dimensions of the activity

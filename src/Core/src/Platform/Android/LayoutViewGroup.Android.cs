@@ -53,23 +53,12 @@ namespace Microsoft.Maui.Handlers
 			var deviceIndependentWidth = widthMeasureSpec.ToDouble(Context);
 			var deviceIndependentHeight = heightMeasureSpec.ToDouble(Context);
 
-			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup OnMeasure {deviceIndependentWidth}, {deviceIndependentHeight}");
-
 			var size = CrossPlatformMeasure(deviceIndependentWidth, deviceIndependentHeight);
-
-			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup CrossPlatformMeasure result was {size}");
 
 			var nativeWidth = Context.ToPixels(size.Width);
 			var nativeHeight = Context.ToPixels(size.Height);
 
 			SetMeasuredDimension((int)nativeWidth, (int)nativeHeight);
-		}
-
-		public override void RequestLayout()
-		{
-			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup.RequestLayout");
-
-			base.RequestLayout();	
 		}
 
 		protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -86,8 +75,6 @@ namespace Microsoft.Maui.Handlers
 
 			var destination = Rectangle.FromLTRB(deviceIndependentLeft, deviceIndependentTop,
 				deviceIndependentRight, deviceIndependentBottom);
-
-			System.Diagnostics.Debug.WriteLine($">>>>>> LayoutViewGroup CrossPlatformArrange to {destination}");
 
 			CrossPlatformArrange(destination);
 		}

@@ -155,5 +155,8 @@ namespace Microsoft.Maui.Controls
 		// wants to modify some aspect of the semantics class
 		internal Semantics SetupSemantics() =>
 			_semantics ??= new Maui.Semantics();
+
+		double IFrameworkElement.Width { get => WidthRequest; }
+		double IFrameworkElement.Height { get => HeightRequest; }
 	}
 }
