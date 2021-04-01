@@ -253,10 +253,10 @@ namespace Maui.Controls.Sample.Pages
 
 		IView CreateSampleGrid()
 		{
-			var layout = new Microsoft.Maui.Controls.Layout2.GridLayout() { ColumnSpacing = 5, RowSpacing = 8 };
+			var layout = new Microsoft.Maui.Controls.Layout2.GridLayout() { ColumnSpacing = 0, RowSpacing = 0 };
 
 			layout.AddRowDefinition(new RowDefinition() { Height = new GridLength(40) });
-			layout.AddRowDefinition(new RowDefinition() { Height = GridLength.Auto });
+			layout.AddRowDefinition(new RowDefinition() { Height = new GridLength(690) });
 
 			layout.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(100) });
 			layout.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(100) });

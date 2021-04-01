@@ -26,8 +26,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.Droid-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.MacCatalyst-net6", "src\Controls\samples\Controls.Sample.MacCatalyst\Maui.Controls.Sample.MacCatalyst-net6.csproj", "{D7FE9FD0-144A-4199-93FC-3AD62325F1D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.Controls.Sample.SingleProject", "src\Controls\samples\Controls.Sample.SingleProject\Maui.Controls.Sample.SingleProject.csproj", "{CB495F62-CFE6-4975-AED8-F26B6C5D0113}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compatibility", "Compatibility", "{123AA89E-1638-4E0E-B828-B8F9F9F906A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{09C264E9-E3F3-4586-9151-DCBB1F6DA7AB}"
@@ -97,11 +95,6 @@ Global
 		{D7FE9FD0-144A-4199-93FC-3AD62325F1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7FE9FD0-144A-4199-93FC-3AD62325F1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7FE9FD0-144A-4199-93FC-3AD62325F1D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB495F62-CFE6-4975-AED8-F26B6C5D0113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB495F62-CFE6-4975-AED8-F26B6C5D0113}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB495F62-CFE6-4975-AED8-F26B6C5D0113}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{CB495F62-CFE6-4975-AED8-F26B6C5D0113}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB495F62-CFE6-4975-AED8-F26B6C5D0113}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75C380E0-CE53-4C01-B89F-CF685331DE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75C380E0-CE53-4C01-B89F-CF685331DE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75C380E0-CE53-4C01-B89F-CF685331DE18}.Release|Any CPU.ActiveCfg = Release|Any CPU

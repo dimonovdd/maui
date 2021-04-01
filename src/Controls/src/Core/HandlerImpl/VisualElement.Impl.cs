@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Microsoft.Maui.Graphics;
@@ -39,11 +40,21 @@ namespace Microsoft.Maui.Controls
 
 		public void Arrange(Rectangle bounds)
 		{
+			if (this is ScrollView)
+			{
+				Debug.WriteLine($">>>>>> ScrollView Arrange");
+			}
+
 			Layout(bounds);
 		}
 
 		void IFrameworkElement.Arrange(Rectangle bounds)
 		{
+			if (this is ScrollView)
+			{
+				Debug.WriteLine($">>>>>> ScrollView(FE) Arrange");
+			}
+
 			ArrangeOverride(bounds);
 		}
 
@@ -51,6 +62,11 @@ namespace Microsoft.Maui.Controls
 		// the interface has to be explicitly implemented to avoid conflict with the old Arrange method
 		protected virtual void ArrangeOverride(Rectangle bounds)
 		{
+			if (this is ScrollView)
+			{
+				Debug.WriteLine($">>>>>> ScrollView ArrangeOverride");
+			}
+
 			if (IsArrangeValid)
 			{
 				return;
