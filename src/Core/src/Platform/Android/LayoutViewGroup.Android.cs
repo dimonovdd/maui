@@ -14,27 +14,22 @@ namespace Microsoft.Maui.Handlers
 	{
 		public LayoutViewGroup(Context context) : base(context)
 		{
-			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
 		{
-			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs) : base(context, attrs)
 		{
-			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
 		{
-			SetLayerType(LayerType.Software, null);
 		}
 
 		public LayoutViewGroup(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
 		{
-			SetLayerType(LayerType.Software, null);
 		}
 
 		protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
