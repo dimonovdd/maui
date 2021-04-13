@@ -8,7 +8,7 @@ namespace Microsoft.Maui
 		/// <summary>
 		/// Gets the view that contains the content of the Page.
 		/// </summary>
-		public IView View { get; }
+		public IView Content { get; }
 
 		// TODO ezhart Should this be called Content instead of View?
 	}

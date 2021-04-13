@@ -36,10 +36,13 @@ namespace Maui.Controls.Sample.Pages
 				"Cras rutrum scelerisque elit, et porta est lobortis ac. " +
 				"Pellentesque eu ornare tortor. Sed bibendum a nisl at laoreet.";
 
+		void SetupMauiLayout()
+		{ 
 			var verticalStack = new VerticalStackLayout() { Spacing = 5, BackgroundColor = Colors.AntiqueWhite };
 			var horizontalStack = new HorizontalStackLayout() { Spacing = 2, BackgroundColor = Colors.CornflowerBlue };
 
 			verticalStack.Add(CreateSampleGrid());
+			AddTextResizeDemo(verticalStack);
 
 			verticalStack.Add(new Label { Text = " ", Padding = new Thickness(10) });
 			var label = new Label { Text = "End-aligned text", BackgroundColor = Colors.Fuchsia, HorizontalTextAlignment = TextAlignment.End };
@@ -247,8 +250,6 @@ namespace Maui.Controls.Sample.Pages
 			Content = verticalStack;
 		}
 
-		//public IView View { get => (IView)Content; set => Content = (View)value; }
-
 		IView CreateSampleGrid()
 		{
 			var layout = new Microsoft.Maui.Controls.Layout2.GridLayout() { ColumnSpacing = 0, RowSpacing = 0 };
@@ -284,9 +285,9 @@ namespace Maui.Controls.Sample.Pages
 		{
 			var resizeTestButton = new Button { Text = "Resize Test" };
 
-			var resizeTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.LightBlue };
-			var explicitWidthTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.LightGreen, WidthRequest = 200 };
-			var widthAndHeightTestLabel = new Label { Text = "Short Text", BackgroundColor = Color.MediumSeaGreen, WidthRequest = 150, HeightRequest = 40 };
+			var resizeTestLabel = new Label { Text = "Short Text", BackgroundColor = Colors.LightBlue };
+			var explicitWidthTestLabel = new Label { Text = "Short Text", BackgroundColor = Colors.LightGreen, WidthRequest = 200 };
+			var widthAndHeightTestLabel = new Label { Text = "Short Text", BackgroundColor = Colors.MediumSeaGreen, WidthRequest = 150, HeightRequest = 40 };
 
 			resizeTestButton.Clicked += (sender, args) => {
 				if (resizeTestLabel.Text == "Short Text")

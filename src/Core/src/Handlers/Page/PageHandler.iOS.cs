@@ -8,7 +8,7 @@ using NativeView = AppKit.NSView;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class PageHandler : AbstractViewHandler<IPage, PageView>
+	public partial class PageHandler : ViewHandler<IPage, PageView>
 	{
 		protected override PageView CreateNativeView()
 		{
@@ -29,12 +29,12 @@ namespace Microsoft.Maui.Handlers
 		{
 			base.SetVirtualView(view);
 
-			_ = TypedNativeView ?? throw new InvalidOperationException($"{nameof(TypedNativeView)} should have been set by base class.");
+			_ = NativeView ?? throw new InvalidOperationException($"{nameof(NativeView)} should have been set by base class.");
 			_ = VirtualView ?? throw new InvalidOperationException($"{nameof(VirtualView)} should have been set by base class.");
 			_ = MauiContext ?? throw new InvalidOperationException($"{nameof(MauiContext)} should have been set by base class.");
 
-			TypedNativeView.CrossPlatformArrange = VirtualView.Arrange;
-			TypedNativeView.AddSubview(VirtualView.View.ToNative(MauiContext));
+			NativeView.CrossPlatformArrange = VirtualView.Arrange;
+			NativeView.AddSubview(VirtualView.Content.ToNative(MauiContext));
 		}
 	}
 }

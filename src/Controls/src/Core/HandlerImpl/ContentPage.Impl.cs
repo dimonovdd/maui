@@ -8,10 +8,10 @@ namespace Microsoft.Maui.Controls
 		// TODO ezhart That there's a layout alignment here tells us this hierarchy needs work :) 
 		public Primitives.LayoutAlignment HorizontalLayoutAlignment => Primitives.LayoutAlignment.Fill;
 
-		public IView View => Content;
-
 		// TODO ezhart super sus
 		public Thickness Margin => Thickness.Zero;
+
+		IView IPage.Content => Content;
 
 		internal override void InvalidateMeasureInternal(InvalidationTrigger trigger)
 		{
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls
 		{
 			get 
 			{ 
-				return base.IsMeasureValid && View.IsMeasureValid; 
+				return base.IsMeasureValid && Content.IsMeasureValid; 
 			}
 
 			protected set => base.IsMeasureValid = value; 
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls
 		{ 
 			get 
 			{
-				return base.IsArrangeValid && View.IsArrangeValid; 
+				return base.IsArrangeValid && Content.IsArrangeValid; 
 			} 
 
 			protected set => base.IsArrangeValid = value; 
@@ -58,7 +58,7 @@ namespace Microsoft.Maui.Controls
 			}
 #endif
 
-			if (View is IFrameworkElement fe)
+			if (Content is IFrameworkElement fe)
 			{
 				fe.Measure(width, height);
 			}
@@ -78,12 +78,12 @@ namespace Microsoft.Maui.Controls
 			IsMeasureValid = true;
 			Arrange(bounds);
 
-			if (View is IFrameworkElement element)
+			if (Content is IFrameworkElement element)
 			{
 				element.Arrange(Frame);
 			}
 
-			if (View is Layout layout)
+			if (Content is Layout layout)
 			{
 				// Force layout resolution if this is a Forms layout
 				// TODO ezhart Not sure this should be happening here; the renderer itself should be doing this. Investigate.
