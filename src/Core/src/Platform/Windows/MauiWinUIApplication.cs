@@ -34,7 +34,7 @@ namespace Microsoft.Maui
 			var window = Application.CreateWindow(activationState);
 			window.MauiContext = mauiContext;
 
-			var content = (window.Page as IView) ?? window.Page.View;
+			var content = (window.Page as IView) ?? window.Page.Content;
 
 			var canvas = CreateRootContainer();
 

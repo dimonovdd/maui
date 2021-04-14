@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Microsoft.Maui.Handlers
 {
-	public partial class PageHandler : ViewHandler<IPage, LayoutView>
+	public partial class PageHandler : ViewHandler<IPage, LayoutPanel>
 	{
 		public override void SetVirtualView(IView view)
 		{
@@ -17,30 +17,20 @@ namespace Microsoft.Maui.Handlers
 			NativeView.CrossPlatformMeasure = VirtualView.Measure;
 			NativeView.CrossPlatformArrange = VirtualView.Arrange;
 
-			foreach (var child in VirtualView.Children)
-			{
-				Add(child);
-			}
+			NativeView.Children.Add(VirtualView.Content.ToNative(MauiContext));
 		}
 
-		protected override LayoutView CreateNativeView()
+		protected override LayoutPanel CreateNativeView()
 		{
 			if (VirtualView == null)
 			{
 				throw new InvalidOperationException($"{nameof(VirtualView)} must be set to create a LayoutView");
 			}
 
-			var view = new LayoutView
+			var view = new LayoutPanel
 			{
 				CrossPlatformMeasure = VirtualView.Measure,
-				CrossPlatformArrange = VirtualView.Arrange,
-				CrossPlatformArrangeChildren = () =>
-				{
-					foreach (var element in VirtualView.Children)
-					{
-						element.Handler?.SetFrame(element.Frame);
-					}
-				}
+				CrossPlatformArrange = VirtualView.Arrange
 			};
 
 			return view;
