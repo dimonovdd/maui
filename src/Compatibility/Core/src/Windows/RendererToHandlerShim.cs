@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Compatibility
 		{
 			Platform.UWP.Platform.SetRenderer(
 				VisualElementRenderer.Element,
-				VisualElementRenderer);
+				null);
 
 			VisualElementRenderer.SetElement(null);
 
@@ -123,6 +123,16 @@ namespace Microsoft.Maui.Controls.Compatibility
 			{
 				SetFrame(VisualElementRenderer.Element.Bounds);
 			}
+		}
+
+		public override void SetFrame(Rectangle rect)
+		{
+			if (rect.Height == -1)
+			{
+				return;
+			}
+
+			base.SetFrame(rect);
 		}
 	}
 }

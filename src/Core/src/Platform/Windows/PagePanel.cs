@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using Microsoft.Maui.Graphics;
 using Microsoft.UI.Xaml.Controls;
 
 namespace Microsoft.Maui
 {
-	public class LayoutPanel : Panel
+	public class PagePanel : ContentControl
 	{
 		internal Func<double, double, Size>? CrossPlatformMeasure { get; set; }
 		internal Action<Rectangle>? CrossPlatformArrange { get; set; }
@@ -19,11 +19,17 @@ namespace Microsoft.Maui
 			var width = availableSize.Width;
 			var height = availableSize.Height;
 
+			if (double.IsInfinity(width))
+			{
+				width = XamlRoot.Size.Width;
+			}
 
-			var crossPlatformSize = CrossPlatformMeasure(width, height);
+			if (double.IsInfinity(height))
+			{
+				height = XamlRoot.Size.Height;
+			}
 
-			width = crossPlatformSize.Width;
-			height = crossPlatformSize.Height;
+			CrossPlatformMeasure(width, height);
 
 			return new Windows.Foundation.Size(width, height);
 		}
@@ -39,7 +45,6 @@ namespace Microsoft.Maui
 			var height = finalSize.Height;
 
 			CrossPlatformArrange?.Invoke(new Rectangle(0, 0, width, height));
-
 
 			return new Windows.Foundation.Size(width, height);
 		}

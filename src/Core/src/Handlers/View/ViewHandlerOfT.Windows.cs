@@ -18,7 +18,6 @@ namespace Microsoft.Maui.Handlers
 			if (rect.Width < 0 || rect.Height < 0)
 				return;
 
-			nativeView.Measure(new Windows.Foundation.Size(rect.Size.Width, rect.Size.Height));
 			nativeView.Arrange(new Windows.Foundation.Rect(rect.X, rect.Y, rect.Width, rect.Height));
 		}
 

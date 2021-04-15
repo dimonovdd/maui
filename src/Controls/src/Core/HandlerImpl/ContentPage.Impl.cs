@@ -41,30 +41,15 @@ namespace Microsoft.Maui.Controls
 
 		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
 		{
-			var width = widthConstraint;
-			var height = heightConstraint;
 
-#if WINDOWS
-			// TODO ezhart Hmmmm......
-
-			if (double.IsInfinity(width))
-			{
-				width = 800;
-			}
-
-			if (double.IsInfinity(height))
-			{
-				height = 800;
-			}
-#endif
 
 			if (Content is IFrameworkElement fe)
 			{
-				fe.Measure(width, height);
+				fe.Measure(widthConstraint, heightConstraint);
 			}
 
 			IsMeasureValid = true;
-			return new Size(width, height);
+			return new Size(widthConstraint, heightConstraint);
 		}
 
 		protected override void ArrangeOverride(Rectangle bounds)
