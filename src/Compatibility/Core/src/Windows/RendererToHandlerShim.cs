@@ -113,7 +113,9 @@ namespace Microsoft.Maui.Controls.Compatibility
 			if (widthConstraint < 0 || heightConstraint < 0)
 				return Size.Zero;
 
-			return VisualElementRenderer.GetDesiredSize(widthConstraint, heightConstraint);
+			var x =  VisualElementRenderer.GetDesiredSize(widthConstraint, heightConstraint);
+
+			return x;
 		}
 
 		public override void UpdateValue(string property)

@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Compatibility.Platform.UWP
 
 		protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
 		{
-			if (Element == null)
+			if (Element == null || Control == null)
 				return finalSize;
 
 			Element.IsInNativeLayout = true;
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Controls.Compatibility.Platform.UWP
 			var result = new Windows.Foundation.Size(width, height);
 
 			Control?.Measure(result);
-
+			
 			return result;
 		}
 
@@ -147,6 +147,20 @@ namespace Microsoft.Maui.Controls.Compatibility.Platform.UWP
 				renderer = _currentView.GetOrCreateRenderer();
 
 			Control.Content = renderer != null ? renderer.ContainerElement : null;
+			Control.VerticalContentAlignment = UI.Xaml.VerticalAlignment.Top;
+			Control.HorizontalContentAlignment = UI.Xaml.HorizontalAlignment.Left;
+
+			//var z = Control.Parent as FrameworkElement;
+			//var z1 = z.HorizontalAlignment;
+
+			//Control.Content = new TextBlock { Text = "hello", Height = 200, Width = 200 };
+
+			//var x = Control.Content as FrameworkElement;
+			//var y = x.HorizontalAlignment;
+
+			Control.Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Windows.UI.Color.FromArgb(255, 180, 180, 0));
+
+			Control.PointerPressed += Control_PointerPressed;
 
 			UpdateContentMargins();
 			if (renderer?.Element != null)
@@ -154,6 +168,31 @@ namespace Microsoft.Maui.Controls.Compatibility.Platform.UWP
 
 			if (renderer?.ContainerElement != null)
 				renderer.ContainerElement.LayoutUpdated += SetInitialRtlPosition;
+		}
+
+		private void Control_PointerPressed(object sender, UI.Xaml.Input.PointerRoutedEventArgs e)
+		{
+			if (sender is ScrollViewer sc)
+			{
+				var content = sc.Content as FrameworkElement;
+
+				global::System.Diagnostics.Debug.WriteLine($">>>>>> content is {content}");
+
+				//sc.
+
+				FrameworkElement parent = sc;
+				while (parent != null)
+				{
+					global::System.Diagnostics.Debug.WriteLine($">>>>>> {parent}");
+
+					if (parent is Control c)
+					{
+						global::System.Diagnostics.Debug.WriteLine($">>>>>> {c.ActualWidth}, {c.ActualHeight}");
+					}
+
+					parent = parent.Parent as FrameworkElement;
+				}
+			}
 		}
 
 		async void OnScrollToRequested(object sender, ScrollToRequestedEventArgs e)

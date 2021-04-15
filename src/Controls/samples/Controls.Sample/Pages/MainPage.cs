@@ -102,7 +102,7 @@ namespace Maui.Controls.Sample.Pages
 			{
 				TextColor = Colors.Green,
 				Text = "Hello I'm a button",
-			//	BackgroundColor = Color.Purple,
+				//	BackgroundColor = Color.Purple,
 				Margin = new Thickness(12)
 			};
 
@@ -139,13 +139,15 @@ namespace Maui.Controls.Sample.Pages
 				Debug.WriteLine($"Text Changed from '{e.OldTextValue}' to '{e.NewTextValue}'");
 			};
 
+			var entryMargin = new Thickness(10, 0);
+
 			verticalStack.Add(entry);
-			verticalStack.Add(new Entry { Text = "Entry", TextColor = Colors.DarkRed, FontFamily = "Dokdo", MaxLength = -1 });
-			verticalStack.Add(new Entry { IsPassword = true, TextColor = Colors.Black, Placeholder = "Pasword Entry" });
+			verticalStack.Add(new Entry { Text = "Entry", TextColor = Colors.DarkRed, FontFamily = "Dokdo", MaxLength = -1, Margin = entryMargin });
+			verticalStack.Add(new Entry { IsPassword = true, TextColor = Colors.Black, Placeholder = "Pasword Entry", Margin = entryMargin });
 			verticalStack.Add(new Entry { IsTextPredictionEnabled = false });
-			verticalStack.Add(new Entry { Placeholder = "This should be placeholder text" });
-			verticalStack.Add(new Entry { Text = "This should be read only property", IsReadOnly = true });
-			verticalStack.Add(new Entry { MaxLength = 5, Placeholder = "MaxLength text" });
+			verticalStack.Add(new Entry { Placeholder = "This should be placeholder text", Margin = entryMargin });
+			verticalStack.Add(new Entry { Text = "This should be read only property", IsReadOnly = true, Margin = entryMargin });
+			verticalStack.Add(new Entry { MaxLength = 5, Placeholder = "MaxLength text", Margin = entryMargin });
 			verticalStack.Add(new Entry { Text = "This should be text with character spacing", CharacterSpacing = 10 });
 			verticalStack.Add(new Entry { Keyboard = Keyboard.Numeric, Placeholder = "Numeric Entry" });
 			verticalStack.Add(new Entry { Keyboard = Keyboard.Email, Placeholder = "Email Entry" });
@@ -162,7 +164,6 @@ namespace Maui.Controls.Sample.Pages
 			var placeholderSearchBar = new SearchBar();
 			placeholderSearchBar.Placeholder = "Placeholder";
 			verticalStack.Add(placeholderSearchBar);
-
 
 			var monkeyList = new List<string>
 			{
@@ -201,8 +202,8 @@ namespace Maui.Controls.Sample.Pages
 			verticalStack.Add(new Image() { Source = "dotnet_bot.png" });
 
 			Content = new ScrollView
-			{
-				Content = verticalStack
+			{ 
+				Content = verticalStack //w Label { Text = "one", BackgroundColor = Colors.Red }
 			};
 		}
 

@@ -73,7 +73,7 @@ namespace Microsoft.Maui
 		bool IsArrangeValid { get; }
 
 		/// <summary>
-		/// Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.
+		/// Signals that the current measure value of this FrameworkElement is no longer valid and must be recomputed during the next measure pass.
 		/// </summary>
 		void InvalidateMeasure();
 

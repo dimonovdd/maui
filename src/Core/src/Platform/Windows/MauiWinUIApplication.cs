@@ -3,7 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Maui.LifecycleEvents;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 
 namespace Microsoft.Maui
 {
@@ -38,7 +40,22 @@ namespace Microsoft.Maui
 
 			var canvas = CreateRootContainer();
 
-			canvas.Children.Add(content.ToNative(window.MauiContext));
+			var fe = content.ToNative(window.MauiContext);
+
+			canvas.Children.Add(
+				
+					new Border() { Child = 
+				
+				fe
+				, Background = new SolidColorBrush(Colors.OrangeRed)
+					}
+				);
+
+			//canvas.Children.Add(new ScrollViewer { Content = new TextBlock { Text = "derp" } });
+			canvas.SizeChanged += (sender, args) => {
+				content.InvalidateMeasure();
+				fe.InvalidateMeasure(); 
+			};
 
 			MainWindow.Content = canvas;
 
@@ -46,6 +63,8 @@ namespace Microsoft.Maui
 
 			Current.Services?.InvokeLifecycleEvents<WindowsLifecycle.OnLaunched>(del => del(this, args));
 		}
+
+		
 
 		Canvas CreateRootContainer()
 		{

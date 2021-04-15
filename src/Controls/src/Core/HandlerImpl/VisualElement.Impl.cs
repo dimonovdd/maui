@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls
 			var newRect = this.ComputeFrame(bounds);
 
 			Bounds = newRect;
-			Handler?.SetFrame(Bounds);
+			//Handler?.SetFrame(Bounds);
 		}
 
 		// TODO: MAUI

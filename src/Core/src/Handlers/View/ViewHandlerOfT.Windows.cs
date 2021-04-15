@@ -29,10 +29,10 @@ namespace Microsoft.Maui.Handlers
 			if (widthConstraint < 0 || heightConstraint < 0)
 				return Size.Zero;
 
-			var useExplicitWidth = VirtualView.Width >= 0;
-			var useExplicitHeight = VirtualView.Height >= 0;
 			var explicitWidth = VirtualView.Width;
 			var explicitHeight = VirtualView.Height;
+			var useExplicitWidth = explicitWidth >= 0;
+			var useExplicitHeight = explicitHeight >= 0;
 
 			if (useExplicitWidth)
 			{

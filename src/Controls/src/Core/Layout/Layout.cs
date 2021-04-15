@@ -68,7 +68,7 @@ namespace Microsoft.Maui.Controls.Layout2
 			LayoutManager.ArrangeChildren(Frame);
 			IsArrangeValid = true;
 
-			Handler?.SetFrame(Frame);
+			//Handler?.SetFrame(Frame);
 		}
 
 		protected override void InvalidateMeasureOverride()
@@ -77,7 +77,7 @@ namespace Microsoft.Maui.Controls.Layout2
 
 			foreach (var child in Children)
 			{
-				child.InvalidateArrange();
+				child.InvalidateMeasure();
 			}
 		}
 

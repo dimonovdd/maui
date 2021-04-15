@@ -41,8 +41,6 @@ namespace Microsoft.Maui.Controls
 
 		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
 		{
-
-
 			if (Content is IFrameworkElement fe)
 			{
 				fe.Measure(widthConstraint, heightConstraint);
@@ -61,21 +59,31 @@ namespace Microsoft.Maui.Controls
 
 			IsArrangeValid = true;
 			IsMeasureValid = true;
-			Arrange(bounds);
 
 			if (Content is IFrameworkElement element)
 			{
-				element.Arrange(Frame);
+				element.Arrange(bounds);
 			}
 
-			if (Content is Layout layout)
+			Arrange(bounds);
+
+			//if (Content is Layout layout)
+			//{
+			//	// Force layout resolution if this is a Forms layout
+			//	// TODO ezhart Not sure this should be happening here; the renderer itself should be doing this. Investigate.
+			//	layout.ResolveLayoutChanges();
+			//}
+
+			//Handler?.SetFrame(Frame);
+		}
+
+		protected override void InvalidateMeasureOverride()
+		{
+			base.InvalidateMeasureOverride();
+			if (Content is IFrameworkElement fe)
 			{
-				// Force layout resolution if this is a Forms layout
-				// TODO ezhart Not sure this should be happening here; the renderer itself should be doing this. Investigate.
-				layout.ResolveLayoutChanges();
+				fe.InvalidateMeasure();
 			}
-
-			Handler?.SetFrame(Frame);
 		}
 	}
 }
